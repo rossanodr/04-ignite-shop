@@ -13,7 +13,7 @@ interface HomeProps {
     id: string;
     name: string;
     imageUrl: string;
-    price: number;
+    price: string;
   }[];
 }
 
@@ -29,8 +29,13 @@ export default function Home({ products }: HomeProps) {
     <HomeContainer ref={sliderRef} className="keen-slider">
       {products.map((product) => {
         return (
-          <Link href="" key={product.id}>
-            <Product className="keen-slider__slide">
+          <Link href={`/product/${product.id}`} key={product.id}>
+            <Product
+              className="keen-slider__slide"
+              // href={`/product/${product.id}`}
+              // as={Link}
+              // key={product.id}
+            >
               <Image
                 src={product.imageUrl}
                 alt="shirt"
@@ -69,6 +74,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       products,
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 };
